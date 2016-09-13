@@ -48,7 +48,7 @@ namespace SpeedTest
             System.Drawing.Graphics graphics = this.CreateGraphics();
             System.Drawing.Rectangle screen = new System.Drawing.Rectangle(
                0, 0, this.Size.Width, this.Size.Height);
-            graphics.FillRectangle(System.Drawing.Brushes.Magenta, screen);
+            graphics.FillRectangle(System.Drawing.Brushes.DarkGoldenrod, screen);
             //graphics.DrawRectangle(System.Drawing.Pens.Red, rectangle);
 
         }
@@ -59,7 +59,7 @@ namespace SpeedTest
             //System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle( x, y, 150, 150);
             System.Drawing.Rectangle screen = new System.Drawing.Rectangle(
                0, 0, this.Size.Width, this.Size.Height);
-            graphics.FillRectangle(System.Drawing.Brushes.Magenta, screen);
+            //graphics.FillRectangle(System.Drawing.Brushes.Magenta, screen);
             graphics.DrawRectangle(System.Drawing.Pens.Red, rectangle);
             
         }
@@ -68,7 +68,7 @@ namespace SpeedTest
         {
             GravityApplication();
             MovementApplication();
-            DrawGameObjects();
+            
             
         }
 
@@ -84,15 +84,20 @@ namespace SpeedTest
                 {
                     gameobjects[i].x = newx;
                 }
+                else
+                {
+                    gameobjects[i].xspeed = 0;
+                }
                 if (newy < this.Size.Height - gameobjects[i].height && newy > 0)
                 {
                     gameobjects[i].y = newy;
-                    onground = true;
+                    
                 }
                 else
                 {
-                    onground = false;
+                    onground = true;
                 }
+              
 
             }
         }
@@ -123,7 +128,8 @@ namespace SpeedTest
                 case 'w':
                     if (onground)
                     {
-                        gameobjects[0].yspeed = -10;
+                        gameobjects[0].yspeed = -25;
+                        onground = false;
                     }
                     break;
                 case 'a':
@@ -140,6 +146,11 @@ namespace SpeedTest
                     break;
 
             }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            DrawGameObjects();
         }
     }
 
